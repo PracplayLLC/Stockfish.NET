@@ -1,5 +1,6 @@
 .idea
 .vs
+*.user
 Stockfish.NET/bin
 Stockfish.NET/obj
 Stockfish.NET.Tests/bin

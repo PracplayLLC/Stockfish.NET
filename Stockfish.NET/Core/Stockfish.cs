@@ -282,16 +282,30 @@ namespace Stockfish.NET.Core
         /// <exception cref="MaxTriesException"></exception>
         public string GetBestMove()
         {
+            return GetBestMove(MAX_TRIES, true);
+        }
+        /// <summary>
+        /// Getting best move of current position
+        /// </summary>
+        /// <param name="maxattempts"></param>
+        /// <param name="isthrow"></param>
+        /// <returns></returns>
+        /// <exception cref="MaxTriesException"></exception>
+        public string GetBestMove(int maxattempts, bool isthrow = true)
+        {
             go();
             var tries = 0;
             while (true)
             {
-                if (tries > MAX_TRIES)
-                {
-                    throw new MaxTriesException();
-                }
 
                 var data = readLineAsList();
+                
+                if ((tries>0) && (tries > maxattempts))
+                {
+                    if (isthrow)
+                        throw new MaxTriesException("tries:"+tries+">"+maxattempts);
+                    return data.Count > 1 ? data[1] : null;
+                }
 
                 if (data[0] == "bestmove")
                 {

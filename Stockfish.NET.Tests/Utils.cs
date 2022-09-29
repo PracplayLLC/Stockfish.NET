@@ -23,6 +23,7 @@ namespace Stockfish.NET.Tests
             }
             else
             {
+                // default for ubuntu/deb, eg: 'sudo apt update && sudo apt install stockfish'
                 path = "/usr/games/stockfish";
             }
             return path;
